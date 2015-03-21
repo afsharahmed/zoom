@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TABLES>
+<TABLE descName="Stores images/audioURL/videoURL" name="Asset" sqlName="assets">
+<COLUMNS>
+<COLUMN maxLength="9" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="6" sqlName="mimeId" type="Integer">mimeId</COLUMN>
+<COLUMN maxLength="100" sqlName="sourceURL" type="String">sourceUrl</COLUMN>
+<COLUMN maxLength="16777215" sqlName="content" type="String">content</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="city details" name="CityDetails" sqlName="city_details">
+<COLUMNS>
+<COLUMN maxLength="6" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="40" sqlName="city" type="String">city</COLUMN>
+<COLUMN maxLength="40" sqlName="state" type="String">state</COLUMN>
+<COLUMN maxLength="40" sqlName="country" type="String">country</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="error details" name="ErrorDetails" sqlName="error_details">
+<COLUMNS>
+<COLUMN maxLength="9" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="200" sqlName="description" type="String">description</COLUMN>
+<COLUMN maxLength="3" sqlName="statusCode" type="Integer">statusCode</COLUMN>
+<COLUMN maxLength="19" sqlName="timestamp" type="java.sql.Timestamp">timestamp</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="notification" name="Notification" sqlName="notification">
+<COLUMNS>
+<COLUMN maxLength="9" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="100" sqlName="user_id" type="String">userId</COLUMN>
+<COLUMN maxLength="250" sqlName="message" type="String">message</COLUMN>
+<COLUMN maxLength="50" sqlName="type" type="String">type</COLUMN>
+<COLUMN maxLength="50" sqlName="status" type="String">status</COLUMN>
+<COLUMN maxLength="5" sqlName="code" type="Integer">code</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="upgrade client" name="UpgradeClient" sqlName="upgrade_client">
+<COLUMNS>
+<COLUMN maxLength="5" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="1" sqlName="isOptional" type="Boolean">isOptional</COLUMN>
+<COLUMN maxLength="500" sqlName="upgradeUrl" type="String">upgradeUrl</COLUMN>
+<COLUMN maxLength="500" sqlName="message" type="String">message</COLUMN>
+<COLUMN maxLength="19" sqlName="timestamp" type="java.sql.Timestamp">timestamp</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user competion mapping" name="UserCompetition" sqlName="user_competion_mapping">
+<COLUMNS>
+<COLUMN maxLength="9" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="9" sqlName="user_id" type="Integer">userId</COLUMN>
+<COLUMN maxLength="9" sqlName="competetion_id" type="Integer">competetionId</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user details" name="User" sqlName="user_details">
+<COLUMNS>
+<COLUMN maxLength="20" sqlName="id" type="String">id</COLUMN>
+<COLUMN maxLength="19" sqlName="first_hit" type="java.sql.Timestamp">firstHit</COLUMN>
+<COLUMN maxLength="19" sqlName="last_hit" type="java.sql.Timestamp">lastHit</COLUMN>
+<COLUMN maxLength="3" sqlName="status" type="Integer">status</COLUMN>
+<COLUMN maxLength="50" sqlName="display_name" type="String">displayName</COLUMN>
+<COLUMN maxLength="50" sqlName="first_name" type="String">firstName</COLUMN>
+<COLUMN maxLength="50" sqlName="last_name" type="String">lastName</COLUMN>
+<COLUMN maxLength="250" sqlName="user_agent" type="String">userAgent</COLUMN>
+<COLUMN maxLength="50" sqlName="user_city" type="String">userCity</COLUMN>
+<COLUMN maxLength="9" sqlName="photo_id" type="Integer">photoId</COLUMN>
+<COLUMN maxLength="9" sqlName="location_id" type="Integer">locationId</COLUMN>
+<COLUMN maxLength="1" sqlName="visible" type="Boolean">visible</COLUMN>
+<COLUMN maxLength="19" sqlName="timestamp" type="java.sql.Timestamp">timestamp</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user friends" name="Friend" sqlName="user_friends">
+<COLUMNS>
+<COLUMN maxLength="12" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="9" sqlName="user_id" type="Integer">userId</COLUMN>
+<COLUMN maxLength="9" sqlName="friend_id" type="Integer">friendId</COLUMN>
+<COLUMN maxLength="19" sqlName="creation_time" type="java.sql.Timestamp">creationTime</COLUMN>
+<COLUMN maxLength="1" sqlName="blocked" type="Boolean">blocked</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user history" name="UserHistory" sqlName="user_history">
+<COLUMNS>
+<COLUMN maxLength="12" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="9" sqlName="user_id" type="Integer">userId</COLUMN>
+<COLUMN maxLength="19" sqlName="first_visit" type="java.sql.Timestamp">firstVisit</COLUMN>
+<COLUMN maxLength="19" sqlName="last_visit" type="java.sql.Timestamp">lastVisit</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user location" name="UserLocation" sqlName="user_location">
+<COLUMNS>
+<COLUMN maxLength="12" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="9" sqlName="user_id" type="Integer">userId</COLUMN>
+<COLUMN maxLength="10" sqlName="latitude" type="String">latitude</COLUMN>
+<COLUMN maxLength="10" sqlName="longitude" type="String">longitude</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="user team" name="UserTeam" sqlName="user_team">
+<COLUMNS>
+<COLUMN maxLength="9" sqlName="id" type="Integer">id</COLUMN>
+<COLUMN maxLength="9" sqlName="user_id" type="Integer">userId</COLUMN>
+<COLUMN maxLength="9" sqlName="team_id" type="Integer">teamId</COLUMN>
+</COLUMNS>
+</TABLE>
+</TABLES>

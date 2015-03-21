@@ -1,0 +1,52 @@
+package @@PACKAGE_NAME@@.repository;
+
+import java.util.List;
+
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This interface exposes methods which can perform database related activities
+ * on <<@@SQL_TABLE_NAME@@>> table to Service Layer. 
+ * 
+ * @author Afshar Ahmed
+ */
+public interface @@CLASS_NAME@@Repository 
+{
+	/**
+	 * Finds all {@link @@CLASS_NAME@@} records in DB.
+	 * 
+	 * @return List<@@CLASS_NAME@@>  List of @@CLASS_NAME@@ objects found.
+	 */
+	public List<@@CLASS_NAME@@> findAll@@CLASS_NAME@@s();
+	
+	/**
+	 * Finds {@link @@CLASS_NAME@@} using the passed id parameter.
+	 * 
+	 * @param id
+	 * @return @@CLASS_NAME@@  Object of @@CLASS_NAME@@ found using given id.
+	 */
+	public @@CLASS_NAME@@ find@@CLASS_NAME@@ById(Integer id);
+	
+	/**
+	 * Adds a record for object {@link @@CLASS_NAME@@} to '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be added 
+	 */
+	public void add@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@);
+
+	/**
+	 * Update a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be updated
+	 */
+	public void update@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@);
+
+	/**
+	 * Delete a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param Integer	  PrimaryKey (Id) of the record to be deleted
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be deleted
+	 */
+	public void delete@@CLASS_NAME@@(final Integer id);
+
+}

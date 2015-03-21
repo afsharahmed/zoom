@@ -1,0 +1,235 @@
+package @@PACKAGE_NAME@@.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.InternalResourceView;
+
+import @@PACKAGE_NAME@@.form.@@CLASS_NAME@@Form;
+import @@PACKAGE_NAME@@.service.@@CLASS_NAME@@Service;
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This class is the controller component that will interact directly with the UI layer.
+ * All request for data retrieval and manipulation by the UI layer must be made to this
+ * controller for {@link @@CLASS_NAME@@}.
+ * 
+ * The instance of {@link  @@CLASS_NAME@@} service which is responsible for handling the business aspects
+ * can be Autowired using Spring's auto-wiring functionality.
+ * 
+ * @author Afshar Ahmed
+ */
+@Controller
+@RequestMapping(value="/secure")
+public class @@CLASS_NAME@@Controller 
+{
+	private Logger	logger	= LoggerFactory.getLogger( @@CLASS_NAME@@Controller.class );
+
+	@Autowired
+	private @@CLASS_NAME@@Service @@CLASS_NAME_LO@@Service;
+
+	public void set@@CLASS_NAME@@Service( @@CLASS_NAME@@Service @@CLASS_NAME_LO@@Service) 
+	{
+		this.@@CLASS_NAME_LO@@Service = @@CLASS_NAME_LO@@Service;
+	}
+
+
+	/**
+	 * Finds all records for {@link @@CLASS_NAME@@} in <<@@SQL_TABLE_NAME@@>> table and 
+	 * navigates to list page. 
+	 * 
+	 * @param HttpServletRequest 	httpServletRequest to add attributes to be used on list page.
+	 * @return {@link ModelAndView} modelAndView object that will hold the request attributes and
+	 * 								tells spring to navigate to '@@CLASS_NAME_LO@@ListPage'
+	 */
+	@RequestMapping("/@@CLASS_NAME_LO@@List.do")
+	public ModelAndView showHomePage(HttpServletRequest request) 
+	{
+		logger.info( "<<<Forwarding to [LIST] page>>>" );
+		
+		// Get list of all available @@CLASS_NAME_LO@@ records from DB
+		JSONArray jsArray = @@CLASS_NAME_LO@@Service.findAll();
+		
+		// Create a view with viewName as the list-page's value configured in tiles-defs.xml
+		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@ListPage");
+		
+		// Add attributes
+		modelAndView.addObject("list", jsArray.toString());		
+		
+		return modelAndView; // navigating to '@@CLASS_NAME_LO@@ListPage' 
+	}
+	
+	/**
+	 * Navigates to add {@link @@CLASS_NAME@@} form page. 
+	 * 
+	 * @return {@link ModelAndView} modelAndView object that will hold an empty @@CLASS_NAME@@ object
+	 * 								and tells spring to navigate to '@@CLASS_NAME_LO@@FormPage'
+	 */
+	@RequestMapping("/@@CLASS_NAME_LO@@AddForm.do")
+	public ModelAndView showAddPage() 
+	{ 
+		logger.info("<<<Forwarding to [ADD] page>>>");
+		
+		// Create a view with viewName as the list-page's value configured in tiles-defs.xml
+		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
+		
+		// Add attributes
+		modelAndView.addObject("@@CLASS_NAME_LO@@", new @@CLASS_NAME@@Form());		
+		
+       return modelAndView; 
+    }
+
+
+	/**
+	 * Navigates to update {@link @@CLASS_NAME@@} form page. 
+	 * 
+	 * @return {@link ModelAndView} modelAndView object that will hold the @@CLASS_NAME@@ object data
+	 * 								that needs to be updated and tells spring to navigate 
+	 * 								to '@@CLASS_NAME_LO@@FormPage'
+	 */	
+	@RequestMapping("/@@CLASS_NAME_LO@@UpdateForm.do")
+	public ModelAndView showUpdatePage(@RequestParam("listItem") String formData) 
+	{ 
+		@@CLASS_NAME@@Form form = new @@CLASS_NAME@@Form();
+		logger.info("<<<Forwarding to [UPDATE] page>>>");
+		logger.info("Form Data: "+formData);
+
+		try
+		{
+			JSONObject jObject = (JSONObject) JSON.parse( formData );
+			
+			@@LOOP-BEGIN@@
+			@@PROPERTY_TYPE@@ @@PROPERTY_NAME@@ = (@@PROPERTY_TYPE@@) jObject.get( "@@PROPERTY_NAME@@" );
+			@@LOOP-END@@
+			
+			@@LOOP-BEGIN@@
+			form.set@@PROPERTY_NAME_UP@@( @@PROPERTY_NAME@@ );
+			@@LOOP-END@@
+					
+		}
+		catch ( IOException e )
+		{
+			e.printStackTrace();
+		}
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
+		
+		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
+		modelAndView.addObject("@@CLASS_NAME_LO@@", form);		
+		
+		return modelAndView; 
+	}
+
+	/**
+	 * Adds a record for the given {@link @@CLASS_NAME@@} form object in DB.
+	 * An operation status message is added as <b>flash attribute</b> (to {@link RedirectAttributes})   
+	 * that can be used on UI for displaying operation status.
+	 * 
+	 * @param {@link @@CLASS_NAME@@Form} 	Form data to be added in DB
+	 * @param {@link RedirectAttributes}	To add flash attributes for a redirect scenario	
+	 * @return String  						A "redirect:" prefixed view-name string
+	 */	
+	@RequestMapping(value="/add@@CLASS_NAME@@.do", method=RequestMethod.POST)
+	public String add(@ModelAttribute("@@CLASS_NAME_LO@@") @@CLASS_NAME@@Form form, RedirectAttributes attributes)
+	{
+		logger.info( "<<<Add @@CLASS_NAME@@ Request>>>" );
+		logger.info( form.toString() );
+
+		@@CLASS_NAME@@ objectToAdd = new @@CLASS_NAME@@();
+		@@LOOP-BEGIN@@
+		objectToAdd.set@@PROPERTY_NAME_UP@@( form.get@@PROPERTY_NAME_UP@@() );
+		@@LOOP-END@@
+		
+		// Request service to add record to DB
+		Boolean result = @@CLASS_NAME_LO@@Service.add@@CLASS_NAME@@( objectToAdd );
+		
+		// Create a message for the current operation performed
+		String operationMsg = result ? "\"Record added successfully\"" : "\"Error occurred while adding record to DB\"";
+
+		// Put success/error msg of DB-add-operation, to be used for displaying on UI, in RedirectAttributes 
+		attributes.addFlashAttribute( "dbOperationMessage", operationMsg );
+	
+		return "redirect:/@@CLASS_NAME_LO@@List.do";
+	}
+	
+	/**
+	 * Updates a record for the given {@link @@CLASS_NAME@@} form object in DB.
+	 * An operation status message is added as <b>flash attribute</b> (to {@link RedirectAttributes})   
+	 * that can be used on UI for displaying operation status.
+	 * 
+	 * @param {@link AlertSettingsForm} 	Form data to be updated in DB
+	 * @param {@link RedirectAttributes}	To add flash attributes for a redirect scenario	
+	 * @return String  						A "redirect:" prefixed view-name string
+	 */	
+	@RequestMapping(value="/update@@CLASS_NAME@@.do", method=RequestMethod.POST)
+	public String update(@ModelAttribute("@@CLASS_NAME_LO@@") @@CLASS_NAME@@Form form, RedirectAttributes attributes)
+	{
+		logger.info( "<<<Update @@CLASS_NAME@@ Request>>>" );
+		logger.info( form.toString() );
+
+		@@CLASS_NAME@@ objectToUpdate = new @@CLASS_NAME@@();
+		@@LOOP-BEGIN@@
+		objectToUpdate.set@@PROPERTY_NAME_UP@@( form.get@@PROPERTY_NAME_UP@@() );
+		@@LOOP-END@@	
+		
+		// Request service to update record to DB
+		Boolean result = @@CLASS_NAME_LO@@Service.update@@CLASS_NAME@@( objectToUpdate );
+		
+		// Create a message for the current operation performed
+		String operationMsg = result ? "\"Record updated successfully\"" : "\"Error occurred while updating record in DB\"";
+
+		// Put success/error msg of DB-add-operation, to be used for displaying on UI, in RedirectAttributes 
+		attributes.addFlashAttribute( "dbOperationMessage", operationMsg );
+		
+		return "redirect:/@@CLASS_NAME_LO@@List.do";
+	}
+	
+	
+	/**
+	 * Deletes a record for the given {@link @@CLASS_NAME@@} form object from DB.
+	 * An operation status message is added as <b>flash attribute</b> (to {@link RedirectAttributes})   
+	 * that can be used on UI for displaying operation status.
+	 * 
+	 * @param  HttpServletRequest   Provides with PrimaryKey (Id) of the record to be deleted
+	 * @param {@link RedirectAttributes}	To add flash attributes for a redirect scenario	
+	 * @return String  						A "redirect:" prefixed view-name string
+	 */		
+	@RequestMapping("/delete@@CLASS_NAME@@.do")
+	public String delete(HttpServletRequest request, RedirectAttributes attributes)
+	{
+		String id = request.getParameter( "listItem" );
+		logger.info( "<<<Delete @@CLASS_NAME@@ Request>>>" );
+		logger.info( "id="+id );
+		
+		// Request service to update record to DB
+		Boolean result = @@CLASS_NAME_LO@@Service.delete@@CLASS_NAME@@( id );
+		
+		// Create a message for the current operation performed
+		String operationMsg = result ? "\"Record deleted successfully\"" : "\"Error occurred while deleting record in DB\"";
+
+		// Put success/error msg of DB-add-operation, to be used for displaying on UI, in RedirectAttributes 
+		attributes.addFlashAttribute( "dbOperationMessage", operationMsg );
+		
+		return "redirect:/@@CLASS_NAME_LO@@List.do";
+	}
+
+}

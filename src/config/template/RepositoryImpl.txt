@@ -1,0 +1,109 @@
+package @@PACKAGE_NAME@@.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This class is responsible for handling database related aspects of {@link @@CLASS_NAME@@} functionality.
+ * It is responsible for managing one single table only. It mustn't call any other Repository classes or Service
+ * classes directly. All exceptions that can occur inside any method must be converted to appropriate custom
+ * exception thrown by method with appropriate error key inserted.
+ * 
+ * @see http://www.petrikainulainen.net/spring-data-jpa-tutorial/
+ * @author Afshar Ahmed
+ */
+@Repository
+public class @@CLASS_NAME@@RepositoryImpl implements @@CLASS_NAME@@Repository
+{
+	private Logger	logger	= LoggerFactory.getLogger( @@CLASS_NAME@@RepositoryImpl.class );
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+
+
+	/**
+	 * Finds all {@link @@CLASS_NAME@@} records in DB.
+	 * 
+	 * @return List<@@CLASS_NAME@@>  List of @@CLASS_NAME@@ objects found.
+	 */	
+	@Transactional
+	@Override
+	public List<@@CLASS_NAME@@> findAll@@CLASS_NAME@@s()
+	{
+		Query query = entityManager.createNamedQuery("getAll@@CLASS_NAME@@");
+		List<@@CLASS_NAME@@> list = query.getResultList();
+		
+		if(list == null) list = new ArrayList<>();
+		
+		return list;
+	}
+
+	/**
+	 * Finds {@link @@CLASS_NAME@@} using the passed id parameter.
+	 * 
+	 * @param id
+	 * @return @@CLASS_NAME@@  Object of @@CLASS_NAME@@ found using given id.
+	 */
+	@Transactional
+	@Override
+	public @@CLASS_NAME@@ find@@CLASS_NAME@@ById(Integer id)
+	{
+		@@CLASS_NAME@@ v = (@@CLASS_NAME@@) entityManager.getReference(@@CLASS_NAME@@.class, @@CLASS_NAME@@Number);  // session.load()
+		
+		logger.info(v.toString());
+		
+		return v;		
+	}
+
+	/**
+	 * Adds a record for object {@link @@CLASS_NAME@@} to '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be added 
+	 */
+	@Override
+	public void add@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@)
+	{
+		entityManager.persist(new@@CLASS_NAME@@);
+	}
+	
+	/**
+	 * Update a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be updated
+	 */
+	@Override
+	public void update@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@)
+	{
+		entityManager.merge(@@CLASS_NAME@@);
+	}
+
+	/**
+	 * Delete a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param Integer	  PrimaryKey (Id) of the record to be deleted
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be deleted
+	 */
+	@Override	
+	public void delete@@CLASS_NAME@@(final Integer id)
+	{
+//		@@CLASS_NAME@@ @@CLASS_NAME@@ = new @@CLASS_NAME@@();
+//		@@CLASS_NAME@@.set@@CLASS_NAME@@number(@@CLASS_NAME@@Number); // Has to be the primary key column
+//		entityManager.remove(@@CLASS_NAME@@);
+
+		Query query = entityManager.createNamedQuery("remove@@CLASS_NAME@@");
+		query.setParameter("id", id);
+		query.executeUpdate();
+		logger.info("@@CLASS_NAME@@: " + id + " deleted successfully");
+	}
+}

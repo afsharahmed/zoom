@@ -1,0 +1,63 @@
+package @@PACKAGE_NAME@@.manager;
+
+import com.ibm.json.java.JSONArray;
+import @@PACKAGE_NAME@@.exception.AddException;
+import @@PACKAGE_NAME@@.exception.DeleteException;
+import @@PACKAGE_NAME@@.exception.NotFoundException;
+import @@PACKAGE_NAME@@.exception.UpdateException;
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This interface exposes business aspects of {@link @@CLASS_NAME@@} functionality to
+ * client. This should contain only those methods(responsibilities) which needs
+ * to be exposed to client. All communication between controller and dao's should 
+ * be done via a manager.
+ * 
+ * @author Afshar Ahmed
+ * 
+ */
+public interface @@CLASS_NAME@@Manager 
+{
+	/**
+	 * Finds an {@link @@CLASS_NAME@@} using the passed id parameter.
+	 * 
+	 * @param id			   Id (PrimaryKey) of the object to be found
+	 * @return @@CLASS_NAME@@  Object of @@CLASS_NAME@@ found using given Id
+	 * @throws NotFoundException
+	 */
+	public @@CLASS_NAME@@ findByPrimaryKey(String id);
+	
+	/**
+	 * Finds all {@link @@CLASS_NAME@@} records in DB
+	 * 
+	 * @return JSONArray  JSONArray of @@CLASS_NAME@@ objects found.
+	 * @throws NotFoundException
+	 */
+	public JSONArray findAll();
+	
+	/**
+	 * Add {@link @@CLASS_NAME@@}
+	 * 
+	 * @param @@CLASS_NAME@@  @@CLASS_NAME_LO@@
+	 * @return Boolean 			Operation status flag that will be true if record added successfully else false.
+	 * @throws AddException
+	 */	
+	public Boolean add@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@);
+
+	/**
+	 * Update a {@link @@CLASS_NAME@@}
+	 * @param @@CLASS_NAME@@  @@CLASS_NAME_LO@@
+	 * @return Boolean 			Operation status flag that will be true if record updated successfully else false. 
+	 * @throws UpdateException
+	 */
+	public Boolean update@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@);
+
+	/**
+	 * Delete a {@link @@CLASS_NAME@@}
+	 * @param id			Id (PrimaryKey) of the object to be found
+	 * @return Boolean 		Operation status flag that will be true if record deleted successfully else false.
+	 * @throws DeleteException
+	 */
+	public Boolean delete@@CLASS_NAME@@(final String id);
+
+}

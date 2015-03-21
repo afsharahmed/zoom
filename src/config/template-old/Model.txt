@@ -1,0 +1,56 @@
+package @@PACKAGE_NAME@@.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Business Data model for {@link @@CLASS_NAME@@}.
+ * 
+ * @author Afshar Ahmed
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+@Entity
+@Table(name="@@SQL_TABLE_NAME@@")
+public class @@CLASS_NAME@@
+{
+	@@LOOP-BEGIN@@
+	@Column(name="@@SQL_COLUMN_NAME@@")
+	private @@PROPERTY_TYPE@@ @@PROPERTY_NAME@@;
+	
+	@@LOOP-END@@
+	
+	@@LOOP-BEGIN@@
+	
+	public @@PROPERTY_TYPE@@ get@@PROPERTY_NAME_UP@@()
+	{
+		return @@PROPERTY_NAME@@;
+	}
+
+	public void set@@PROPERTY_NAME_UP@@(@@PROPERTY_TYPE@@ @@PROPERTY_NAME@@)
+	{
+		this.@@PROPERTY_NAME@@ = @@PROPERTY_NAME@@;
+	}
+	@@LOOP-END@@
+	
+	/**
+	 * Overrides the toString() of Object Class
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		final StringBuffer buffer = new StringBuffer();
+
+		buffer.append( "@@CLASS_NAME@@ Object> { ");		
+		@@LOOP-BEGIN@@
+		buffer.append( "@@PROPERTY_NAME@@=" + @@PROPERTY_NAME@@ + ", " );
+		@@LOOP-END@@
+		buffer.append( " } ");
+
+		return buffer.toString();
+	}
+
+}

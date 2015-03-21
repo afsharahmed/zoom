@@ -1,0 +1,175 @@
+package @@PACKAGE_NAME@@.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+
+import @@PACKAGE_NAME@@.exception.AddException;
+import @@PACKAGE_NAME@@.exception.DeleteException;
+import @@PACKAGE_NAME@@.exception.NotFoundException;
+import @@PACKAGE_NAME@@.exception.UpdateException;
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This class is responsible for handling database related aspects of {@link @@CLASS_NAME@@} functionality.
+ * It is responsible for managing one single table only. It mustn't call any other DAO classes or Managers
+ * classes directly. All exceptions that can occur inside any method must be converted to appropriate custom
+ * exception thrown by method with appropriate error key inserted.
+ * 
+ * @author Afshar Ahmed
+ */
+@Repository
+public class @@CLASS_NAME@@DaoImpl implements @@CLASS_NAME@@Dao
+{
+	private Logger	logger	= LoggerFactory.getLogger( @@CLASS_NAME@@DaoImpl.class );
+
+	@Autowired
+	private SessionFactory sessionFactory;	// Injected from applicationContext.xml
+
+    
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	
+	/**
+	 * Finds {@link @@CLASS_NAME@@} using the passed id parameter.
+	 * 
+	 * @param id
+	 * @return @@CLASS_NAME@@ Object of @@CLASS_NAME_LO@@ found using given id.
+	 * @throws NotFoundException
+	 */
+	public @@CLASS_NAME@@ findByPrimaryKey(String id) throws NotFoundException
+	{
+		@@CLASS_NAME@@ @@CLASS_NAME_LO@@ = null;
+
+		try
+		{
+			String hibQuery = "from @@CLASS_NAME@@ where @@IDENTIFIER_PROPERTY@@ = :idParam "; // Using HQL here
+			logger.debug( "Executing Query to find @@CLASS_NAME@@ by id {} :{}", id, hql );
+
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery( hibQuery );
+			query.setString( "idParam", id.toString() );
+			@@CLASS_NAME_LO@@ = (@@CLASS_NAME@@) query.uniqueResult();
+		}
+		catch ( DataAccessException e )
+		{
+			e.getMessage();
+			e.printStackTrace();
+			throw new NotFoundException( "Unable to find @@CLASS_NAME@@ for the given @@CLASS_NAME_LO@@ id." );
+		}
+
+		return @@CLASS_NAME_LO@@;
+	}
+
+	/**
+	 * Finds all {@link @@CLASS_NAME@@} records in DB.
+	 * 
+	 * @return List<@@CLASS_NAME@@> List of @@CLASS_NAME@@ objects found.
+	 * @throws NotFoundException
+	 */
+	public List<@@CLASS_NAME@@> findAll() throws NotFoundException
+	{
+		List<@@CLASS_NAME@@> list = new ArrayList<@@CLASS_NAME@@>();
+
+		try
+		{
+			String query = "from @@CLASS_NAME@@"; // Using HQL here
+			logger.debug( "Executing Query to find all @@CLASS_NAME@@:{}", query );
+			
+			Session session = sessionFactory.getCurrentSession();
+			list = session.createQuery(query).list();
+		}
+		catch ( DataAccessException e )
+		{
+			e.getMessage();
+			e.printStackTrace();
+			throw new NotFoundException( "Unable to find @@CLASS_NAME_LO@@." );
+		}
+
+		return list;
+	}
+
+	/**
+	 * Adds a record for object {@link @@CLASS_NAME@@} to '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be added 
+	 * @throws AddException
+	 */
+	public void add@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@) throws AddException
+	{
+		logger.info( "<<Adding @@CLASS_NAME@@ to DB>>" );
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.save( @@CLASS_NAME_LO@@ );
+		}
+		catch ( DataAccessException e )
+		{
+			e.getMessage();
+			e.printStackTrace();
+			throw new AddException( "Unable to add @@CLASS_NAME@@" );
+		}
+	}
+
+	/**
+	 * Update a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be updated
+	 * @throws UpdateException
+	 */
+	public void update@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@) throws UpdateException
+	{
+		logger.info( "<<Updating @@CLASS_NAME@@ in DB>>" );
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.update( @@CLASS_NAME_LO@@ );
+		}
+		catch ( DataAccessException e )
+		{
+			e.getMessage();
+			e.printStackTrace();
+			throw new UpdateException( "Unable to update @@CLASS_NAME_LO@@" );
+		}
+	}
+
+	/**
+	 * Delete a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param  String	PrimaryKey (Id) of the record to be deleted
+	 * @throws DeleteException
+	 */
+	public void delete@@CLASS_NAME@@(final String id) throws DeleteException
+	{
+		logger.info( "<<Deleting @@CLASS_NAME@@ from DB>>" );
+		try
+		{
+			String hibQuery = "Delete from @@CLASS_NAME@@ where @@IDENTIFIER_PROPERTY@@ = :idParam "; // Using HQL here
+			logger.debug( "Executing Query to delete @@CLASS_NAME@@ by id {} :{}", id, hibQuery );
+			
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery( hibQuery );
+			query.setString( "idParam", id.toString() );
+			int i = query.executeUpdate();
+			logger.info( "After Delete status:="+i );
+		}
+		catch ( DataAccessException e )
+		{
+			e.getMessage();
+			e.printStackTrace();
+			throw new DeleteException( "Exception occured while deleting @@CLASS_NAME_LO@@." );
+		}
+
+	}
+
+}

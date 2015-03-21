@@ -1,0 +1,74 @@
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+function loadPageComponents()
+{
+	if(ge('@@IDENTIFIER_PROPERTY@@').value.length) // If some value is set for '@@IDENTIFIER_PROPERTY@@' field 
+	{
+		// Initialise form for UPDATE functionality
+		document.forms[0].action = "update@@CLASS_NAME@@.do";
+	}
+	else
+	{
+		// Initialise form for ADD functionality
+		document.forms[0].action = "add@@CLASS_NAME@@.do";
+
+	}		
+
+}
+
+
+function validate()
+{
+	@@LOOP-BEGIN@@
+	var @@PROPERTY_NAME@@ = ge('@@PROPERTY_NAME@@').value;
+	@@LOOP-END@@
+
+	@@LOOP-BEGIN@@
+	if(@@PROPERTY_NAME@@.length < 1)
+	{
+		alert('@@PROPERTY_NAME_UP@@ cannot be empty');
+		return false;
+	}
+	
+	@@LOOP-END@@
+	
+	return true;
+}
+</script>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
+
+<div class="form_container">
+	
+	<f:form action="" method="post" modelAttribute="@@CLASS_NAME_LO@@" 
+	id="form_template" class="form_template" onsubmit="return validate();">
+		
+		<div class="form_template_title">
+			<div>@@CLASS_NAME_SP@@</div>
+			<p>This is your form description. Click save after filling data.</p><hr>
+		</div>						
+		<ul>
+			@@LOOP-BEGIN@@
+			<li>
+				<label class="" for="@@PROPERTY_NAME@@">@@PROPERTY_NAME_UP@@</label>
+				<div>
+					<f:input id="@@PROPERTY_NAME@@" path="@@PROPERTY_NAME@@" type="text" maxlength="@@PROPERTY_MAX_LENGTH@@" required="true"/> 
+				</div> 
+			</li>		
+			@@LOOP-END@@
+		</ul>
+
+		<div align="center" style="clear: both; height: 50px; width: auto; padding: 20px 0px 5px 0px;" >
+
+			<button class="button_" type="submit">Save</button>
+			<button class="button_" style="margin-left: 20px;" onclick="history.back(0);">Cancel</button>
+		</div>
+	</f:form>	
+	
+</div>
+
+
+<!-- Div that forms a semi-transparent layer between background UI and popup -->
+<div id="popupBg" class="popupBg" ></div>  

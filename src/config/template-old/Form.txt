@@ -1,0 +1,49 @@
+package @@PACKAGE_NAME@@.form;
+
+/**
+ * Java form bean for @@CLASS_NAME@@
+ * 
+ * @author Afshar Ahmed
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+public class @@CLASS_NAME@@Form
+{
+	@@LOOP-BEGIN@@
+	private @@PROPERTY_TYPE@@ @@PROPERTY_NAME@@;
+	
+	@@LOOP-END@@
+	
+	@@LOOP-BEGIN@@
+	
+	public @@PROPERTY_TYPE@@ get@@PROPERTY_NAME_UP@@()
+	{
+		return @@PROPERTY_NAME@@;
+	}
+
+	public void set@@PROPERTY_NAME_UP@@(@@PROPERTY_TYPE@@ @@PROPERTY_NAME@@)
+	{
+		this.@@PROPERTY_NAME@@ = @@PROPERTY_NAME@@;
+	}
+	@@LOOP-END@@
+	
+	/**
+	 * Overrides the toString() of Object Class
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		final StringBuffer buffer = new StringBuffer();
+
+		buffer.append( "@@CLASS_NAME@@ Object> { ");		
+		@@LOOP-BEGIN@@
+		buffer.append( "@@PROPERTY_NAME@@=" + @@PROPERTY_NAME@@ + ", " );
+		@@LOOP-END@@
+		buffer.append( " } ");
+
+		return buffer.toString();
+	}
+
+}

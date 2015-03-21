@@ -1,0 +1,61 @@
+package @@PACKAGE_NAME@@.dao;
+
+import java.util.List;
+
+import @@PACKAGE_NAME@@.exception.AddException;
+import @@PACKAGE_NAME@@.exception.DeleteException;
+import @@PACKAGE_NAME@@.exception.NotFoundException;
+import @@PACKAGE_NAME@@.exception.UpdateException;
+import @@PACKAGE_NAME@@.model.@@CLASS_NAME@@;
+
+/**
+ * This interface exposes methods which can perform database related activities
+ * on <<@@SQL_TABLE_NAME@@>> table to Managers. 
+ * 
+ * @author Afshar Ahmed
+ */
+public interface @@CLASS_NAME@@Dao 
+{
+	/**
+	 * Finds an {@link @@CLASS_NAME@@} using the passed id parameter.
+	 * 
+	 * @param id
+	 * @return @@CLASS_NAME@@  Object of @@CLASS_NAME@@ found using given id.
+	 * @throws NotFoundException
+	 */
+	public @@CLASS_NAME@@ findByPrimaryKey(String id) throws NotFoundException;
+	
+	/**
+	 * Finds all {@link @@CLASS_NAME@@} records in DB.
+	 * 
+	 * @return List<@@CLASS_NAME@@>  List of @@CLASS_NAME@@ objects found.
+	 * @throws NotFoundException
+	 */
+	public List<@@CLASS_NAME@@> findAll() throws NotFoundException;
+	
+	/**
+	 * Adds a record for object {@link @@CLASS_NAME@@} to '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be added 
+	 * @throws AddException
+	 */
+	public void add@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@) throws AddException;
+
+	/**
+	 * Update a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be updated
+	 * @throws UpdateException
+	 */
+	public void update@@CLASS_NAME@@(@@CLASS_NAME@@ @@CLASS_NAME_LO@@) throws UpdateException;
+
+	/**
+	 * Delete a record for object {@link @@CLASS_NAME@@} in '@@SQL_TABLE_NAME@@' table
+	 * 
+	 * @param String	  PrimaryKey (Id) of the record to be deleted
+	 * @param @@CLASS_NAME@@  The @@CLASS_NAME_LO@@ Object to be deleted
+	 * @throws DeleteException
+	 */
+	public void delete@@CLASS_NAME@@(final String id) throws DeleteException;
+
+}

@@ -1,0 +1,110 @@
+<script type="text/javascript">
+var LIST_ATTRIBUTE = <%=request.getAttribute("list")%>;
+
+function loadPageComponents()
+{
+	populateTable();
+ 	
+	var serverMessage = <%=request.getAttribute("dbOperationMessage")%>;
+	if(serverMessage && serverMessage != null && serverMessage != "null")
+	{
+		console.log(serverMessage);
+		if(serverMessage.indexOf("success") != -1)
+		{
+			displayMessage(serverMessage, "success");
+		}
+		else {
+			displayMessage(serverMessage, "error");
+		}
+		
+	}
+}
+
+//Function to populate folder properties
+function populateTable() 
+{
+	if (LIST_ATTRIBUTE) 
+	{
+		if (LIST_ATTRIBUTE.length > 0) 
+		{
+			// Initialise JQuery data-table plugin object
+			var listTable = $('#table_list').dataTable();
+			var total_items = LIST_ATTRIBUTE.length;
+
+			// Add row to the table for every list-item retrived from DB
+			for ( var i = 0; i < total_items; i++) 
+			{
+				listTable.fnAddData( getRowData(LIST_ATTRIBUTE[i]) );
+			}
+			
+			// Sorting the entire table by descending order of Id column values
+			listTable.fnSort( [ [0,'desc'] ] );  
+			
+		} else {
+			ge('empty_list').style.display = "block";
+			ge('table_list').style.display = "none";
+		}
+		
+	} else {
+		alert('Some error occured while retrieving list of objects.');
+	}
+}
+
+function getRowData(obj)
+{
+	var array = [];
+	@@LOOP-BEGIN@@
+	array.push(obj.@@PROPERTY_NAME@@);
+	@@LOOP-END@@
+	
+	var editElem = "<img class='item_edit_img' src='images/item_edit_s.png' onclick='editItem("+ JSON.stringify(obj) + ")' title='Edit Item'>&nbsp;&nbsp;";
+	var deleteElem = "<img class='item_delete_img' src='images/item_delete_s.png' onclick='deleteItem("+ JSON.stringify(obj) + ")' title='Delete Item'>";
+	array.push(""+editElem+deleteElem);
+
+	return array;
+}
+
+function editItem(obj) {
+	ge('listItem').value = JSON.stringify(obj);
+	document.forms[0].action="@@CLASS_NAME_LO@@UpdateForm.do";
+	document.forms[0].submit();	
+}
+
+function deleteItem(obj) {
+	ge('listItem').value = obj.@@IDENTIFIER_PROPERTY@@;
+	document.forms[0].action="delete@@CLASS_NAME@@.do";
+	document.forms[0].submit();	
+
+}
+</script>
+<div class="list_table_container" onload="loadPageComponents();">
+	<div class="list_table_component">
+		<div  class="list_table_header">@@CLASS_NAME_SP@@ LIST</div>
+		
+		<div id="operation_result" align="center">${ dbOperationMessage }</div>
+		
+		<div id="empty_list" style="height: 20px; line-height: 20px; color:#444; display: none;">No items found in DB</div>
+		
+		<table class="list_table" id="table_list">
+			<thead>
+				<tr>
+					@@LOOP-BEGIN@@
+					<th>@@PROPERTY_NAME_UP@@</th>
+					@@LOOP-END@@
+					<th>Action</th>					
+				</tr>
+			</thead>
+			
+			<tbody class="list_table_body" id="table_list_body"></tbody>
+		</table>
+	</div>
+
+	<div align="center" style="clear: both; height: 50px; width: auto; padding: 20px 0px 5px 0px;" >
+		<button class="button_"  onclick="navigate('@@CLASS_NAME_LO@@AddForm.do')">Add</button>
+		<button class="button_" style="margin-left: 20px;" onclick="alert('Development Pending');">Delete All</button>
+	</div>
+</div>
+
+<form method="post" action="">
+<input type="hidden" name="listItem" id="listItem"/>
+</form>

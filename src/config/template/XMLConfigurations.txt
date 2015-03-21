@@ -1,0 +1,26 @@
+<!-- Spring Dao bean configurations -->
+@@LOOP-BEGIN@@
+	<bean id="@@CLASS_NAME_LO@@Dao" class="@@PACKAGE_NAME@@.dao.@@CLASS_NAME@@DaoImpl"/>
+@@LOOP-END@@
+
+<!-- Spring Manager bean configurations -->	
+@@LOOP-BEGIN@@
+	<bean id="@@CLASS_NAME_LO@@Manager" class="@@PACKAGE_NAME@@.manager.@@CLASS_NAME@@ManagerImpl"/>
+@@LOOP-END@@	
+	
+<!-- Tiles configurations -->
+@@LOOP-BEGIN@@
+	<!-- =======================================================  -->
+	<!-- @@CLASS_NAME@@ Pages									  -->
+  	<!-- =======================================================  -->
+  		
+	<definition name="@@CLASS_NAME_LO@@ListPage" extends="defaultLayout">
+		<put-attribute name="title" value="@@CLASS_NAME@@ List" />
+		<put-attribute name="body" value="/jsp/@@CLASS_NAME@@List.jsp" />
+	</definition>
+	<definition name="@@CLASS_NAME_LO@@FormPage" extends="defaultLayout">
+		<put-attribute name="body" value="/jsp/@@CLASS_NAME@@Form.jsp" />
+	</definition>
+		
+@@LOOP-END@@
+	

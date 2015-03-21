@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TABLES>
+<TABLE descName="alerts text lang spec" name="AlertsTextLangSpec" sqlName="alerts_text_lang_spec">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="ALERT_ID" type="String">alertId</COLUMN>
+<COLUMN maxLength="3" sqlName="LANG_CODE" type="String">langCode</COLUMN>
+<COLUMN maxLength="512" sqlName="ALERT_TEXT" type="String">alertText</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="content provider" name="ContentProvider" sqlName="content_provider_info">
+<COLUMNS>
+<COLUMN maxLength="8" sqlName="CONTENT_PROVIDER_ID" type="String">contentProviderId</COLUMN>
+<COLUMN maxLength="128" sqlName="CONTENT_PROVIDER_DESC" type="String">contentProviderDesc</COLUMN>
+<COLUMN maxLength="128" sqlName="HANDLER_CLASS" type="String">handlerClass</COLUMN>
+<COLUMN maxLength="512" sqlName="HANDLER_CONFIG" type="String">handlerConfig</COLUMN>
+<COLUMN maxLength="256" sqlName="MATCH_ALERT_URL" type="String">matchAlertUrl</COLUMN>
+<COLUMN maxLength="256" sqlName="TRIVIA_ALERT_URL" type="String">triviaAlertUrl</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="country prefix mapping" name="CountryPrefixMapping" sqlName="country_prefix_mapping">
+<COLUMNS>
+<COLUMN maxLength="20" sqlName="ID" type="Long">id</COLUMN>
+<COLUMN maxLength="100" sqlName="COUNTRY" type="String">country</COLUMN>
+<COLUMN maxLength="10" sqlName="PREFIX" type="String">prefix</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="events template" name="EventsTemplate" sqlName="events_template">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="MATCH_EVENT_ID" type="String">matchEventId</COLUMN>
+<COLUMN maxLength="512" sqlName="ALERT_TEMPLATE" type="String">alertTemplate</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="match alert" name="MatchAlert" sqlName="match_alerts_details">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="LEAGUE_ID" type="String">leagueId</COLUMN>
+<COLUMN maxLength="32" sqlName="MATCH_ID" type="String">matchId</COLUMN>
+<COLUMN maxLength="16" sqlName="EVENT_ID" type="String">eventId</COLUMN>
+<COLUMN maxLength="32" sqlName="ALERT_ID" type="String">alertId</COLUMN>
+<COLUMN maxLength="19" sqlName="GENERATION_TIME" type="java.sql.Timestamp">generationTime</COLUMN>
+<COLUMN maxLength="8" sqlName="TOTAL_SUBS" type="Integer">totalSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="PROCESSED_SUBS" type="Integer">processedSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="SUCCESS_SUBS" type="Integer">successSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="FAILURE_SUBS" type="Integer">failureSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="STATUS" type="String">status</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="service configuration" name="ServiceConfiguration" sqlName="service_config">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="512" sqlName="SERVICE_DESC" type="String">serviceDesc</COLUMN>
+<COLUMN maxLength="8" sqlName="PROJECTED_BASE" type="Integer">projectedBase</COLUMN>
+<COLUMN maxLength="3" sqlName="ACCEPTED_DELAY_IN_MINS" type="Integer">acceptedDelayInMins</COLUMN>
+<COLUMN maxLength="1" sqlName="USE_LANG_SPECIFIC_TEXT" type="Boolean">useLangSpecificText</COLUMN>
+<COLUMN maxLength="3" sqlName="DEFAULT_LANG" type="String">defaultLang</COLUMN>
+<COLUMN maxLength="8" sqlName="CONTENT_PROVIDER_ID" type="String">contentProviderId</COLUMN>
+<COLUMN maxLength="16" sqlName="SERVICE_TIMEZONE" type="String">serviceTimezone</COLUMN>
+<COLUMN maxLength="1" sqlName="SCORE_RECENCY_MODEL" type="Boolean">scoreRecencyModel</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="service league" name="ServiceLeague" sqlName="service_leagues">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="LEAGUE_ID" type="String">leagueId</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="service match event" name="ServiceMatchEvent" sqlName="service_match_events">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="MATCH_EVENT_ID" type="String">matchEventId</COLUMN>
+<COLUMN maxLength="1" sqlName="CHARGING_ENABLED" type="Boolean">chargingEnabled</COLUMN>
+<COLUMN maxLength="256" sqlName="CHARGING_PARAMS" type="String">chargingParams</COLUMN>
+<COLUMN maxLength="60" sqlName="MATCH_ALERT_PRE_TEXT" type="String">matchAlertPreText</COLUMN>
+<COLUMN maxLength="60" sqlName="MATCH_ALERT_POST_TEXT" type="String">matchAlertPostText</COLUMN>
+<COLUMN maxLength="16" sqlName="MATCH_ALERT_SENDER_ID" type="String">matchAlertSenderId</COLUMN>
+<COLUMN maxLength="16" sqlName="MESSAGE_TYPE" type="String">messageType</COLUMN>
+<COLUMN maxLength="128" sqlName="SMSC_META_INFO" type="String">smscMetaInfo</COLUMN>
+<COLUMN maxLength="3" sqlName="EXPIRY_IN_MINUTES" type="Integer">expiryInMinutes</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="service subscription" name="ServiceSubscription" sqlName="service_subscriptions">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="SUBSCRIPTION_ID" type="String">subscriptionId</COLUMN>
+<COLUMN maxLength="256" sqlName="USER_INFO" type="String">userInfo</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="Service Team Mapping" name="ServiceTeamMapping" sqlName="service_teams">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="TEAM_ID" type="String">teamId</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="service trivia category" name="ServiceTriviaCategory" sqlName="service_trivia_categories">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="TRIVIA_CATEGORY_ID" type="String">triviaCategoryId</COLUMN>
+<COLUMN maxLength="1" sqlName="CHARGING_ENABLED" type="Boolean">chargingEnabled</COLUMN>
+<COLUMN maxLength="256" sqlName="CHARGING_PARAMS" type="String">chargingParams</COLUMN>
+<COLUMN maxLength="60" sqlName="TRIVIA_PRE_TEXT" type="String">triviaPreText</COLUMN>
+<COLUMN maxLength="60" sqlName="TRIVIA_POST_TEXT" type="String">triviaPostText</COLUMN>
+<COLUMN maxLength="16" sqlName="TRIVIA_SENDER_ID" type="String">triviaSenderId</COLUMN>
+<COLUMN maxLength="256" sqlName="TRIVIA_TIMESLOTS" type="String">triviaTimeslots</COLUMN>
+<COLUMN maxLength="16" sqlName="MESSAGE_TYPE" type="String">messageType</COLUMN>
+<COLUMN maxLength="128" sqlName="SMSC_META_INFO" type="String">smscMetaInfo</COLUMN>
+<COLUMN maxLength="3" sqlName="EXPIRY_IN_MINUTES" type="Integer">expiryInMinutes</COLUMN>
+<COLUMN maxLength="8" sqlName="LANGUAGE" type="String">language</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="smsc account properties" name="SmscAccountProperties" sqlName="smsc_account_properties">
+<COLUMNS>
+<COLUMN maxLength="3" sqlName="SMSC_ID" type="String">smscId</COLUMN>
+<COLUMN maxLength="32" sqlName="PROP_NAME" type="String">propName</COLUMN>
+<COLUMN maxLength="256" sqlName="PROP_VALUE" type="String">propValue</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="smsc account" name="SmscAccount" sqlName="smsc_accounts">
+<COLUMNS>
+<COLUMN maxLength="3" sqlName="SMSC_ID" type="String">smscId</COLUMN>
+<COLUMN maxLength="16" sqlName="SMSC_NAME" type="String">smscName</COLUMN>
+<COLUMN maxLength="512" sqlName="SMSC_DESC" type="String">smscDesc</COLUMN>
+<COLUMN maxLength="16" sqlName="CONNECTION_PROTOCOL" type="String">connectionProtocol</COLUMN>
+<COLUMN maxLength="8" sqlName="PROTOCOL_VERSION" type="String">protocolVersion</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="smsc service mapping" name="SmscServiceMapping" sqlName="smsc_service_map">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="3" sqlName="SMSC_ID" type="String">smscId</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="trigger attempt" name="TriggerAttempt" sqlName="trigger_attempt_info">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="SUBSCRIPTION_ID" type="String">subscriptionId</COLUMN>
+<COLUMN maxLength="32" sqlName="TRIGGER_ID" type="String">triggerId</COLUMN>
+<COLUMN maxLength="10" sqlName="TRIGGER_DATE" type="java.sql.Date">triggerDate</COLUMN>
+<COLUMN maxLength="19" sqlName="ATTEMPTED_TIME" type="java.sql.Timestamp">attemptedTime</COLUMN>
+<COLUMN maxLength="3" sqlName="RESPONSE_CODE" type="Integer">responseCode</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="trigger" name="Trigger" sqlName="trigger_details">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="SUBSCRIPTION_ID" type="String">subscriptionId</COLUMN>
+<COLUMN maxLength="32" sqlName="TRIGGER_ID" type="String">triggerId</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="trigger transaction" name="TriggerTransaction" sqlName="trigger_transactions">
+<COLUMNS>
+<COLUMN maxLength="32" sqlName="TRIGGER_REF_ID" type="String">triggerRefId</COLUMN>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="32" sqlName="SUBSCRIPTION_ID" type="String">subscriptionId</COLUMN>
+<COLUMN maxLength="32" sqlName="TRIGGER_ID" type="String">triggerId</COLUMN>
+<COLUMN maxLength="10" sqlName="TRIGGER_DATE" type="java.sql.Date">triggerDate</COLUMN>
+<COLUMN maxLength="16" sqlName="STATUS" type="String">status</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="trivia alert" name="TriviaAlert" sqlName="trivia_alerts_details">
+<COLUMNS>
+<COLUMN maxLength="16" sqlName="SERVICE_ID" type="String">serviceId</COLUMN>
+<COLUMN maxLength="12" sqlName="TRIVIA_TIMESLOT" type="String">triviaTimeslot</COLUMN>
+<COLUMN maxLength="32" sqlName="ALERT_ID" type="String">alertId</COLUMN>
+<COLUMN maxLength="19" sqlName="ALERT_TIME" type="java.sql.Timestamp">alertTime</COLUMN>
+<COLUMN maxLength="512" sqlName="ALERT_TEXT" type="String">alertText</COLUMN>
+<COLUMN maxLength="8" sqlName="TOTAL_SUBS" type="Integer">totalSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="PROCESSED_SUBS" type="Integer">processedSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="SUCCESS_SUBS" type="Integer">successSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="FAILURE_SUBS" type="Integer">failureSubs</COLUMN>
+<COLUMN maxLength="8" sqlName="STATUS" type="String">status</COLUMN>
+</COLUMNS>
+</TABLE>
+</TABLES>
