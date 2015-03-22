@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <TABLES>
-<TABLE descName="alerts text lang spec" name="AlertsTextLangSpec" sqlName="alerts_text_lang_spec">
+<TABLE descName="Category" name="Category" sqlName="mercury_category">
 <COLUMNS>
-<COLUMN maxLength="4" sqlName="id" type="String">id</COLUMN>
+<COLUMN maxLength="4" sqlName="id" type="Integer">id</COLUMN>
 <COLUMN maxLength="100" sqlName="name" type="String">name</COLUMN>
 <COLUMN maxLength="1000" sqlName="icon" type="java.sql.Blob">icon</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="Product" name="Product" sqlName="mercury_product">
+<COLUMNS>
+<COLUMN maxLength="8" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="30" sqlName="category" type="String">category</COLUMN>
+<COLUMN maxLength="100" sqlName="title" type="String">title</COLUMN>
+<COLUMN maxLength="21845" sqlName="description" type="String">description</COLUMN>
+<COLUMN maxLength="50" sqlName="author" type="String">author</COLUMN>
+<COLUMN maxLength="50" sqlName="publication" type="String">publication</COLUMN>
+<COLUMN maxLength="10" sqlName="publishedDate" type="java.sql.Date">publishedDate</COLUMN>
+<COLUMN maxLength="12" sqlName="price" type="Float">price</COLUMN>
+<COLUMN maxLength="1000" sqlName="icon" type="java.sql.Blob">icon</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="UserPrincipal" name="UserPrincipal" sqlName="mercury_user">
+<COLUMNS>
+<COLUMN maxLength="10" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="15" sqlName="username" type="String">username</COLUMN>
+<COLUMN maxLength="15" sqlName="password" type="String">password</COLUMN>
+<COLUMN maxLength="10" sqlName="role" type="String">role</COLUMN>
+<COLUMN maxLength="1" sqlName="isBlocked" type="Boolean">isblocked</COLUMN>
+<COLUMN maxLength="19" sqlName="lastLogin" type="java.sql.Timestamp">lastlogin</COLUMN>
+<COLUMN maxLength="4" sqlName="enabled" type="Integer">enabled</COLUMN>
+</COLUMNS>
+</TABLE>
+<TABLE descName="UserDetails" name="UserDetails" sqlName="mercury_user_details">
+<COLUMNS>
+<COLUMN maxLength="7" sqlName="id" type="Long">id</COLUMN>
+<COLUMN maxLength="10" sqlName="firstName" type="String">firstname</COLUMN>
+<COLUMN maxLength="10" sqlName="middleName" type="String">middlename</COLUMN>
+<COLUMN maxLength="10" sqlName="lastName" type="String">lastname</COLUMN>
+<COLUMN maxLength="10" sqlName="dob" type="java.sql.Date">dob</COLUMN>
+<COLUMN maxLength="33" sqlName="address" type="String">address</COLUMN>
+<COLUMN maxLength="16" sqlName="city" type="String">city</COLUMN>
+<COLUMN maxLength="16" sqlName="state" type="String">state</COLUMN>
+<COLUMN maxLength="16" sqlName="country" type="String">country</COLUMN>
+<COLUMN maxLength="2" sqlName="pincode" type="String">pincode</COLUMN>
+<COLUMN maxLength="5" sqlName="contactNumber" type="String">contactNumber</COLUMN>
+<COLUMN maxLength="5" sqlName="alternateContactNumber" type="String">alternateContactNumber</COLUMN>
+<COLUMN maxLength="16" sqlName="email" type="String">email</COLUMN>
+<COLUMN maxLength="4" sqlName="gender" type="Integer">gender</COLUMN>
+<COLUMN maxLength="4" sqlName="maritalStatus" type="Integer">maritalStatus</COLUMN>
 </COLUMNS>
 </TABLE>
 </TABLES>
