@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TABLES>
+<TABLE descName="alerts text lang spec" name="AlertsTextLangSpec" sqlName="alerts_text_lang_spec">
+<COLUMNS>
+<COLUMN maxLength="4" sqlName="id" type="String">id</COLUMN>
+<COLUMN maxLength="100" sqlName="name" type="String">name</COLUMN>
+<COLUMN maxLength="1000" sqlName="icon" type="java.sql.Blob">icon</COLUMN>
+</COLUMNS>
+</TABLE>
+</TABLES>
