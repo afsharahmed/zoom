@@ -59,21 +59,21 @@ public class @@CLASS_NAME@@Controller
 	 * @return {@link ModelAndView} modelAndView object that will hold the request attributes and
 	 * 								tells spring to navigate to '@@CLASS_NAME_LO@@ListPage'
 	 */
-	@RequestMapping("/@@CLASS_NAME_LO@@List.do")
+	@RequestMapping("/list@@CLASS_NAME@@")
 	public ModelAndView showHomePage(HttpServletRequest request) 
 	{
 		logger.info( "<<<Forwarding to [LIST] page>>>" );
 		
 		// Get list of all available @@CLASS_NAME_LO@@ records from DB
-		JSONArray jsArray = @@CLASS_NAME_LO@@Service.findAll();
+		List<@@CLASS_NAME@@> list = @@CLASS_NAME_LO@@Service.findAll();
 		
 		// Create a view with viewName as the list-page's value configured in tiles-defs.xml
-		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@ListPage");
+		ModelAndView mv = new ModelAndView("@@CLASS_NAME_LO@@ListPage");
 		
 		// Add attributes
-		modelAndView.addObject("list", jsArray.toString());		
+		mv.addObject("list", list);		
 		
-		return modelAndView; // navigating to '@@CLASS_NAME_LO@@ListPage' 
+		return mv; // navigating to '@@CLASS_NAME_LO@@ListPage' 
 	}
 	
 	/**
@@ -82,18 +82,18 @@ public class @@CLASS_NAME@@Controller
 	 * @return {@link ModelAndView} modelAndView object that will hold an empty @@CLASS_NAME@@ object
 	 * 								and tells spring to navigate to '@@CLASS_NAME_LO@@FormPage'
 	 */
-	@RequestMapping("/@@CLASS_NAME_LO@@AddForm.do")
+	@RequestMapping("/add@@CLASS_NAME@@")
 	public ModelAndView showAddPage() 
 	{ 
 		logger.info("<<<Forwarding to [ADD] page>>>");
 		
 		// Create a view with viewName as the list-page's value configured in tiles-defs.xml
-		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
+		ModelAndView mv = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
 		
 		// Add attributes
-		modelAndView.addObject("@@CLASS_NAME_LO@@", new @@CLASS_NAME@@Form());		
+		mv.addObject("@@CLASS_NAME_LO@@", new @@CLASS_NAME@@Form());		
 		
-       return modelAndView; 
+       return mv; 
     }
 
 
@@ -104,7 +104,7 @@ public class @@CLASS_NAME@@Controller
 	 * 								that needs to be updated and tells spring to navigate 
 	 * 								to '@@CLASS_NAME_LO@@FormPage'
 	 */	
-	@RequestMapping("/@@CLASS_NAME_LO@@UpdateForm.do")
+	@RequestMapping("/update@@CLASS_NAME@@")
 	public ModelAndView showUpdatePage(@RequestParam("listItem") String formData) 
 	{ 
 		@@CLASS_NAME@@Form form = new @@CLASS_NAME@@Form();
@@ -133,10 +133,10 @@ public class @@CLASS_NAME@@Controller
 			e.printStackTrace();
 		}
 		
-		ModelAndView modelAndView = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
-		modelAndView.addObject("@@CLASS_NAME_LO@@", form);		
+		ModelAndView mv = new ModelAndView("@@CLASS_NAME_LO@@FormPage");
+		mv.addObject("@@CLASS_NAME_LO@@", form);		
 		
-		return modelAndView; 
+		return mv; 
 	}
 
 	/**
